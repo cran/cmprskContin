@@ -1,0 +1,5 @@
+cmprskContin      Compute continuous mark-specific relative risks 
+cmprsk   Compute continuous mark-specific relative risks
+plotCmprsk   Plot estimated vaccine efficacy or relative risk 
+summaryCmprsk Summary of statistical test results  
+

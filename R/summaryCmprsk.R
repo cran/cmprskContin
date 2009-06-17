@@ -1,0 +1,35 @@
+summaryCmprsk <- function(x) {
+vect <- x[[1]]
+# Print out the key results as per 
+# Gilbert, McKeague and Sun, Biostatistics (2008).
+cat("\n")
+cat("Test results as described in Gilbert, McKeague, and Sun, Biostatistics (2008):")
+cat("\n\n")
+cat("The paper recommends the following: \n")
+cat("\n")
+cat("U^1_1 and U^1_2 for 1-sided testing of H_0^0: VE(t,v) = 0,\n")
+cat("U^1_3 and U^1_4 for 2-sided testing of H_0^0: VE(t,v) = 0,\n")
+cat("U^np_1 for 1-sided testing of H_0: VE(t,v) = VE(t),\n")
+cat("U^np_2 for 2-sided testing of H_0: VE(t,v) = VE(t),\n")
+cat("\n")
+cat("Corresponding p-values from the current analysis:\n")
+cat("Nonparametric 1-sided testing of H_0^0: VE(t,v) = 0:\n")
+cat("U^1_1 = ",format(vect$pval11,nsmall=5),"\n")
+cat("U^1_2 = ",format(vect$pval12,nsmall=5),"\n")
+cat("\n")
+cat("Nonparametric 2-sided testing of H_0^0: VE(t,v) = 0:\n")
+cat("U^1_3 = ",format(vect$pval13,nsmall=5),"\n")
+cat("U^1_4 = ",format(vect$pval14,nsmall=5),"\n")
+cat("\n")
+cat("Nonparametric 1-sided testing of H_0: VE(t,v) = VE(t):\n")
+cat("U^np_1 = ",format(vect$pvalnp1,nsmall=5),"\n")
+cat("\n")
+cat("Nonparametric 2-sided testing of H_0: VE(t,v) = VE(t),:\n")
+cat("U^np_2 = ",format(vect$pvalnp2,nsmall=5),"\n")
+cat("\n")
+cat("\n")
+cat("Cumulative incidence estimate of overall VE = ",format(vect$VEhatCI,nsmall=5),"\n")
+cat("Proportional hazard estimate of overall VE = ",format(vect$VEhatPH,nsmall=5),"\n")
+cat("Log-rank statistic for comparing overall hazard rates = ",format(vect$LogRankZ,nsmall=5),"\n")
+}
+

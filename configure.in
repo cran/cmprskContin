@@ -1,0 +1,57 @@
+AC_INIT(src/Makevars.in)
+###
+###
+echo " This package has only been tested with gfortran and must be installed on a 64-bit Linux system. "
+
+if uname -i|grep -q x86_64; then
+  echo "64-bit...good!" 
+else
+  echo "Stop! The current version of this package can only be installed on 64-bit Linux."
+  exit 1
+fi
+if uname -o|grep -q Linux; then
+  echo "Linux...good!" 
+else
+  echo "Stop! The current version of this package can only be installed on 64-bit Linux."
+  exit 1
+fi
+
+
+echo " R_HOME is ${R_HOME}"
+echo "Attempting to determine R_ARCH..."
+r_arch=`echo 'cat(.Platform$r_arch);q();' | ${R_HOME}/bin/R --silent --vanilla|grep -v 'cat'`
+if test -z "${r_arch}"; then
+  R_ARCH=
+else
+  R_ARCH="/${r_arch}"
+fi
+echo "R_ARCH = ${R_ARCH}"
+
+
+
+echo "Attempting to detect how R was configured for Fortran ...."
+if test -f ${R_HOME}/etc${R_ARCH}/Makeconf ; then
+  FC=`grep '^FC ' ${R_HOME}/etc${R_ARCH}/Makeconf|cut -c6-`
+else
+  echo "I cannot find your Makeconf file; This seems to be"
+  echo "   a non-standard R build or R did not detect a"
+  echo "   Fortran compiler during build time. "
+  AC_PROG_FC()
+fi
+
+if test "x${FC}" != x; then
+	FC=`basename "${FC}"`
+fi
+
+case "${FC}" in
+    gfortran*)
+      echo "  R configured for gfortran."
+      AC_SUBST(OUR_FFLAGS, "-mcmodel=medium")
+      AC_OUTPUT(src/Makevars)
+      ;;
+    *)
+      echo "    Unsupported Fortran compiler or"
+      echo "    compilers unavailable! Stop!"
+      exit 1
+      ;;
+esac

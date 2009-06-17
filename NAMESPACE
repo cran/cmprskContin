@@ -1,0 +1,4 @@
+useDynLib(cmprskContin)
+export(cmprsk,plotCmprsk,summaryCmprsk)
+
+
