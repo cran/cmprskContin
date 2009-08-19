@@ -35,7 +35,7 @@ A labeled plot of cumulative or doubly cumulative VE or RR plot with confidence 
 Gilbert, P., McKeague, I. and Sun, Y. (2008) \emph{The 2-sample problem for failure rates depending on a continuous mark: an application to vaccine efficacy}. Biostatistics 9, 2, 263-276.\cr
 Andersen, P. K., Borgan, O., Gill, R. D., and Keiding. (1993) \emph{Statistical Models Based on Counting Processes.} New York: Springer.
 }
-\author{Peter Gilbert \cr
+\author{Peter Gilbert, Ian McKeague, and Yanqing Sun \cr
 Maintainer: Valerie Obenchain <vobencha@fhcrc.org>}
 \seealso{
 \code{summaryCmprsk} and \code{cmprsk} functions

@@ -14,8 +14,8 @@ Estimation and testing of continuous mark-specific relative risks in two groups 
 \tabular{ll}{
 Package: \tab cmprskContin\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2009-06-17\cr
+Version: \tab 1.1\cr
+Date: \tab 2009-08-19\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }
@@ -44,7 +44,7 @@ There are 3 functions : \cr
 \code{summaryCmprsk}\cr
 }
 \author{
-Peter Gilbert\cr
+Peter Gilbert, Ian McKeague, and Yanqing Sun\cr
 Maintainer: Valerie Obenchain <vobencha@fhcrc.org>
 }
 

@@ -23,7 +23,7 @@ Andersen, P. K., Borgan, O., Gill, R. D., and Keiding. (1993) \emph{Statistical 
 
 }
 
-\author{Peter Gilbert \cr
+\author{Peter Gilbert, Ian McKeague, and Yanqing Sun \cr
 Maintainer: Valerie Obenchain <vobencha@fhcrc.org>}
 \seealso{
 \code{cmprsk} and \code{plotCmprsk} functions
