@@ -3,7 +3,7 @@ AC_INIT(src/Makevars.in)
 ###
 echo " This package has only been tested with gfortran and must be installed on a 64-bit Linux system. "
 
-if uname -i|grep -q x86_64; then
+if uname -m|grep -q x86_64; then
   echo "64-bit...good!" 
 else
   echo "Stop! The current version of this package can only be installed on 64-bit Linux."

@@ -1,0 +1,14 @@
+
+Version 1.2
+  o change flag for uname call in config file, line 5,  
+	from: if uname -i|grep -q x86_64; then 
+	to: if uname -m|grep -q x86_64; then 
+
+
+Version 1.1
+  o add Ian McKeague and Yanqing Sun as co-authors
+ 
+
+Version 1.0
+  o first CRAN release of the cmprskContin package
+

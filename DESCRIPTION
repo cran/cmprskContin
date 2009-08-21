@@ -1,8 +1,8 @@
 Package: cmprskContin
 Type: Package
 Title: Continuous mark-specific relative risks for two groups
-Version: 1.1
-Date: 2009-08-19
+Version: 1.2
+Date: 2009-08-21
 Author: Peter Gilbert, Ian McKeague, and Yanqing Sun
 SystemRequirements: Linux/64bit
 Maintainer: Valerie Obenchain <vobencha@fhcrc.org>
@@ -18,6 +18,6 @@ Description: Estimation and testing of continuous mark-specific
 License: GPL-2
 Repository: CRAN
 LazyLoad: yes
-Packaged: 2009-08-19 23:15:53 UTC; vobencha
+Packaged: 2009-08-21 17:41:34 UTC; vobencha
 OS_type: unix
-Date/Publication: 2009-08-20 13:48:02
+Date/Publication: 2009-08-21 17:57:49
