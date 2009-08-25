@@ -14,8 +14,8 @@ Estimation and testing of continuous mark-specific relative risks in two groups 
 \tabular{ll}{
 Package: \tab cmprskContin\cr
 Type: \tab Package\cr
-Version: \tab 1.2\cr
-Date: \tab 2009-08-21\cr
+Version: \tab 1.3\cr
+Date: \tab 2009-08-25\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }
