@@ -7,7 +7,7 @@ of mark-specific cumulative incidence ratios (cumulative in time) and of mark-sp
 
 }
 \usage{
-cmprsk(gp, ftime, ftype, mark, nboot=5000, ngrid=25, ngridv=25, 
+cmprsk(gp, ftime, ftype, mark, nboot=5000, ngrid, ngridv, 
 T1=0, T2=0, UT1=0, UT2=0, ttanal=0, BAND1=0, BAND2=0, TAILSL=1, 
 TAILSU=1, V1=0, V2=0, UV1=0, UV2=0, BANDV1=0, BANDV2=0, BANDVLOW=0, 
 BANDVUP=0, TAILSV=1)
@@ -19,8 +19,8 @@ of event time (i.e., HIV infection) and censoring time. Missing values are not a
 \item{ftype}{Vector indicating 1=failure (infected) or 0=right censored (uninfected). Missing values are not allowed.}
 \item{mark}{Vector of continuous mark value. This value should be in [0,1] if infected and measured, 99 otherwise. The mark for all subjects with \code{ftype}=0 should be set to 99 (i.e., mark does not exist for these subjects). A mark value of 99 should be used for subjects with \code{ftype}=1 if the mark is missing or was not measured. This function performs a complete-case analysis and the \code{ftype}=1 subjects with a mark value of 99 will be excluded.}
 \item{nboot}{Number of bootstrap replicates for computing p-values, \code{nboot} \eqn{\geq 5000} is recommended}
- \item{ngrid}{(optional) Number of failure time gridpoints for computing the test process}
- \item{ngridv}{(optional) Number of mark gridpoints for computing the test process}
+ \item{ngrid}{(optional) Number of failure time gridpoints for computing the test process. If specified, this value must be less than the length of the \code{ftime} vector. Default is round((0.5)*length(\code{ftime})).}
+ \item{ngridv}{(optional) Number of mark gridpoints for computing the test process. If specified, this value must be less than the number of subjects with \code{ftype}=1. Default is round((0.5)*length(which(\code{ftype}==1))).}
  \item{T1}{(optional) Smallest failure time used to compute the test statistics. This value should be just
 larger than the smallest observed failure time. The default (indicated by \code{T1}=0) uses the smallest 
 failure time such that there are 2 failure times smaller than \code{T1} in each group.}
@@ -171,7 +171,7 @@ Maintainer: Valerie Obenchain <vobencha@fhcrc.org>}
 \examples{
 ## Simulate data
 set.seed(100)
-gp <- rep(1:2, times=50)
+gp <- rep(0:1, times=50)
 ftime <- 50*runif(100)
 ftype <- rep(0:1, each=50)
 # uninfected subjects do not have mark value; use 99

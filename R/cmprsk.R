@@ -1,4 +1,4 @@
-cmprsk <- function(gp, ftime, ftype, mark, nboot=5000, ngrid=25, ngridv=25, 
+cmprsk <- function(gp, ftime, ftype, mark, nboot=5000, ngrid, ngridv, 
 T1=0, T2=0, UT1=0, UT2=0, ttanal=0, BAND1=0, BAND2=0, TAILSL=1, TAILSU=1, 
 V1=0, V2=0, UV1=0, UV2=0, BANDV1=0, BANDV2=0, BANDVLOW=0, BANDVUP=0, TAILSV=1) {
 
@@ -9,16 +9,28 @@ if(T1>0 & UT1>T1) {stop("The value of UT1 must be less than or equal to T1.")}
 if(UT2>0 & UT2<T2) {stop("The value of UT2 must be greater than or equal to T2.")} 
 if(V1>0 &  UV1>V1) {stop("The value of UV1 must be less than or equal to V1.")}
 if(UV2>0 &  UV2<V2) {stop("The value of UV2 must be greater than or equal to V2.")} 
+if(missing(ngrid)) ngrid <- round((0.5)*length(ftime)) else {
+	if(ngrid > length(ftime)) stop("The value of ngrid must be less than the length of the time vector (ftime).") }
+if(missing(ngridv)) ngridv <- round((0.5)*length(which(ftype==1))) else {
+	 if(ngridv > length(which(ftype==1))) stop("The value of ngridv must be less than the number of subjects with failure (ftype=1).")}
+# The value of maxm should be the number of failures (ftype=1) plus one. The value of 400 is being used due to reasons in the legacy Fortran code. This hard code restriction will only allow 399 failures in a dataset. In the case when a dataset has >399 failues, an error message will be produced and the code will need modification.
+if(length(which(ftype==1))>399) stop("There are >=400 failures in this dataset (failure is ftype=1). This version of the cmprskContin package can only handle < 400 failues. Please contact the package maintainer for an update.")
 
 ## Inputs for Fortran:
 maxn <- length(gp)
-maxm <- length(which(ftype==1)) 
+#maxm <- length(which(ftype==1)) + 1 
+maxm <- 400
 keep <- ftype==0 | (ftype==1 & mark >=0 & mark <= 1)
 gp <- gp[keep]
 ftime <- ftime[keep]
 ftype <- ftype[keep]
 mark <- mark[keep]
 df <- data.frame(gp, ftime, ftype, mark) 
+
+# check for no failures in the trt groups 
+if(length(df$gp[gp==1 & ftype==1]) < 1) stop("There are no failures (ftype=1) in the treatment group (gp=1).")
+if(length(df$gp[gp!=1 & ftype==1]) < 1) stop("There are no failures (ftype=1) in the non-treatment group (gp=0).")
+
 names(df) <- c("Vx","time","delta","mark")
 vac <- subset(df, df$Vx==1) 
 placebo <- subset(df, df$Vx!=1) 
@@ -32,7 +44,7 @@ dim2 <- ngridv
 dim3 <- tsub
 doubIN <- c(T1,T2,UT1,UT2,ttanal,BAND1,BAND2,BANDV1,BANDV2,BANDVLOW,BANDVUP,V1,V2,UV1,UV2) 
 intIN <- c(nboot,ngrid,ngridv,TAILSL,TAILSU,TAILSV)
-mark <- round(mark, digits=4)
+cause <- round(cause, digits=4)
 time <- round(time, digits=4)
 
 ## Fortran call

@@ -1,21 +1,36 @@
 
+Version 1.5
+  o Change maxm variable in cmprsk.R 
+	from: maxm <- length(which(ftype==1)) 
+	to: maxm <- 400 
+  o Added check for number of failures >=400    
+  o Added check for no failures (no ftype=1) in either group   
+  o Added check to ensure ngridv < # of subjects with failure (ftype=1)  
+  o Added check to ensure ngrid < length of the time vector (ftime)  
+  o Change defaults for ngridv and ngrid to depend on the length of ftype and ftime, respectively.
+
+
+Version 1.4beta (not on cran)
+  o Change maxm to maxm=400 instead of # of infecteds in dataset 
+
+
 Version 1.3
-  o change flag for uname call in config file, line 5, again. The change for v1.2 didn't work for 
+  o Change flag for uname call in config file, line 5, again. The change for v1.2 didn't work for 
 debian linux 32bit user/64 bit kernel combo.  
 	from: if uname -m|grep -q x86_64; then 
 	to: if gcc -dumpmachine|grep -q x86_64; then 
 
 
 Version 1.2
-  o change flag for uname call in config file, line 5, so the check will work on debian linux 
+  o Change flag for uname call in config file, line 5, so the check will work on debian linux 
 	from: if uname -i|grep -q x86_64; then 
 	to: if uname -m|grep -q x86_64; then 
 
 
 Version 1.1
-  o add Ian McKeague and Yanqing Sun as co-authors
+  o Add Ian McKeague and Yanqing Sun as co-authors
  
 
 Version 1.0
-  o first CRAN release of the cmprskContin package
+  o First CRAN release of the cmprskContin package
 

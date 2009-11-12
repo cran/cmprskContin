@@ -43,7 +43,7 @@ Maintainer: Valerie Obenchain <vobencha@fhcrc.org>}
 \examples{
 ## Simulate data
 set.seed(100)
-gp <- rep(1:2, times=50)
+gp <- rep(0:1, times=50)
 ftime <- 50*runif(100)
 ftype <- rep(0:1, each=50)
 # uninfected subjects do not have mark value; use 99

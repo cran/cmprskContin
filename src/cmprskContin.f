@@ -118,7 +118,7 @@ cc	OUTtm9 = vector of estimated variance of cumulative vaccine efficacy
 cc	
 cc	
 cc-----------------------------------------
-cc	FUNCTIONS AND SUBROUTIENES:
+cc	FUNCTIONS AND SUBROUTINES:
 cc-----------------------------------------
 cc	ran1 : generates a single random number
 cc	rstart : initializes the table for the f(97,33,-mod 1.)
@@ -1794,7 +1794,7 @@ cc-----------------------------------------------------
 cc weightv is a vector of the number of failures with
 cc marks between the grid values
 
-c	Change ngridv-1 to ngridv: need peter to confirm
+c	Change ngridv-1 to ngridv: 
 
 c      do 307 j=1,(ngridv-1)
        do 307 j=1,(ngridv)
