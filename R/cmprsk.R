@@ -13,13 +13,14 @@ if(missing(ngrid)) ngrid <- round((0.5)*length(ftime)) else {
 	if(ngrid > length(ftime)) stop("The value of ngrid must be less than the length of the time vector (ftime).") }
 if(missing(ngridv)) ngridv <- round((0.5)*length(which(ftype==1))) else {
 	 if(ngridv > length(which(ftype==1))) stop("The value of ngridv must be less than the number of subjects with failure (ftype=1).")}
-# The value of maxm should be the number of failures (ftype=1) plus one. The value of 400 is being used due to reasons in the legacy Fortran code. This hard code restriction will only allow 399 failures in a dataset. In the case when a dataset has >399 failues, an error message will be produced and the code will need modification.
-if(length(which(ftype==1))>399) stop("There are >=400 failures in this dataset (failure is ftype=1). This version of the cmprskContin package can only handle < 400 failues. Please contact the package maintainer for an update.")
+# Revision May 21, 2010 (v 1.6)
+#if(length(which(ftype==1))>399) stop("There are >=400 failures in this dataset (failure is ftype=1). This version of the cmprskContin package can only handle < 400 failues. Please contact the package maintainer for an update.")
 
-## Inputs for Fortran:
+## Fortran inputs:
 maxn <- length(gp)
-#maxm <- length(which(ftype==1)) + 1 
-maxm <- 400
+# Revision May 21, 2010 (v 1.6)
+#maxm <- 400
+maxm <- length(which(ftype==1)) + 10 
 keep <- ftype==0 | (ftype==1 & mark >=0 & mark <= 1)
 gp <- gp[keep]
 ftime <- ftime[keep]
@@ -27,7 +28,7 @@ ftype <- ftype[keep]
 mark <- mark[keep]
 df <- data.frame(gp, ftime, ftype, mark) 
 
-# check for no failures in the trt groups 
+## Check for no failures in the trt groups 
 if(length(df$gp[gp==1 & ftype==1]) < 1) stop("There are no failures (ftype=1) in the treatment group (gp=1).")
 if(length(df$gp[gp!=1 & ftype==1]) < 1) stop("There are no failures (ftype=1) in the non-treatment group (gp=0).")
 
@@ -47,7 +48,7 @@ intIN <- c(nboot,ngrid,ngridv,TAILSL,TAILSU,TAILSV)
 cause <- round(cause, digits=4)
 time <- round(time, digits=4)
 
-## Fortran call
+## Fortran 
 ans = .Fortran('cmprskContin', 
 	as.integer(dim1), as.integer(dim2), as.integer(dim3), as.integer(maxn), as.integer(maxm),
 	as.integer(gpsub), as.double(time), as.integer(censor), as.double(cause), as.integer(intIN), as.double(doubIN), 
@@ -81,7 +82,6 @@ ind <- which(timeMark[,1]==0)
 timeMark <- timeMark[-ind,]
 colnames(timeMark) <- c("nsamp","eventtime","mark","F1","F2","varF1","varF2","VEC","varVEC")
 
-outlist <- list(STATvec,VECmat,VEDCmat,timeMark)
+return( list(STATvec=STATvec,VECmat=VECmat,VEDCmat=VEDCmat,timeMark=timeMark) )
 
-outlist
 }

@@ -1,4 +1,11 @@
 
+Version 1.6 
+  o Change maxm variable in cmprsk.R 
+	from: maxm <- 400 
+	to: maxm <- length(which(ftype==1))  + 10
+  o Removed check for number of failures >=400    
+
+
 Version 1.5
   o Change maxm variable in cmprsk.R 
 	from: maxm <- length(which(ftype==1)) 
