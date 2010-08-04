@@ -1,4 +1,7 @@
 
+Version 1.7 
+  o Package maintainer changed  
+
 Version 1.6 
   o Change maxm variable in cmprsk.R 
 	from: maxm <- 400 
